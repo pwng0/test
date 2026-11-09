@@ -1,18 +1,23 @@
-name: sbom
+name: sbom-manual
+
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
+    inputs:
+      target_path:
+        description: "対象ディレクトリ(例: . や services/api)"
+        required: true
+        default: "."
+
 permissions:
   contents: read
+
 jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: anchore/sbom-action/download-syft@v0
-      - run: syft version
-      - run: syft dir:. -o cyclonedx-json=sbom.json
+      - run: syft "dir:${{ inputs.target_path }}" -o cyclonedx-json=sbom.json
       - uses: actions/upload-artifact@v4
         with:
           name: sbom
