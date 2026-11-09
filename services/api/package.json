@@ -1,0 +1,13 @@
+{
+  "name": "sbom-test-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SBOM test (services/api)",
+  "dependencies": {
+    "axios": "0.21.1",
+    "minimist": "1.2.5"
+  },
+  "devDependencies": {
+    "jest": "29.7.0"
+  }
+}
